@@ -30,7 +30,7 @@ def print_word_freq(file):
     dict_list = sorted(make_dictionary.items(), reverse=True, key=lambda x: x[1])
     sortdict = dict(dict_list)
     for word, count in sortdict.items():
-        print(f"{word} | {count} {count*'*'}")
+        print(f"{word: ^15} | {count: ^1} {count*'*'}")
 
 
 if __name__ == "__main__":
