@@ -1,6 +1,6 @@
 #from operator import truediv
 #from optparse import Values
-
+import pprint
 
 STOP_WORDS = [
     'a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'has', 'he',
@@ -16,33 +16,22 @@ def print_word_freq(file):
         read_file = open_file.read()
         no_punct = read_file.replace(",", "").replace(".", "").replace("?", "")
         #print(no_punct)
-        split_word = no_punct.lower()#.replace(" ", "")
-        new_list = split_word.split()#.replace(STOP_WORDS, "")
+        new_list = no_punct.lower().split()
+        no_stop_list = []
+        for word in new_list:
+            if word not in STOP_WORDS:
+                no_stop_list.append(word)
         #print(new_list)
 
-    make_dictionary = dict.fromkeys(new_list, 0)
-    for word in new_list:
+    make_dictionary = dict.fromkeys(no_stop_list, 0)
+    for word in no_stop_list:
         make_dictionary[word] += 1
-    print(make_dictionary)
+    #print(make_dictionary)
+    dict_list = sorted(make_dictionary.items(), reverse=True, key=lambda x: x[1])
+    sortdict = dict(dict_list)
+    for word, count in sortdict.items():
+        print(f"{word} | {count} {count*'*'}")
 
-
-
-    # def get_numbers(s, e, i):
-    #     return list(range(s, e, i))
-    # start, end, intval = 1, 662, 1
-    # zip_list = zip(get_numbers(start, end, intval), new_list)
-    # #print(zip_list)
-    # new_dict = dict(zip_list)
-    # print(new_dict)
-
-
-    # for keys in new_dict:
-    #     if new_dict[Values] == new_dict[Values]:
-    #         print(keys)
-
-
-
-#        print(f' "we" appears {new_list.count("we")} time(s)')
 
 if __name__ == "__main__":
     import argparse
